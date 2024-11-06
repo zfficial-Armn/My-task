@@ -1,0 +1,170 @@
+<?php include('signupprocess.php'); ?>
+<html lang="en">
+<head>
+    <!-- meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <!-- The Bootstrap CSS -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" integrity="sha384-JcKb8q3iqJ61gNV9KGb8thSsNjpSL0n8PARn9HuZOnIxN0hoP+VmmDGMN5t9UJ0Z" crossorigin="anonymous">
+    <link rel="stylesheet" href="assets/css/style.css" />
+    <style type="text/css">
+        body {
+            background-image: url('images/MOUcampus.jpg');
+            background-size: cover;
+            background-position: bottom;
+            height: 100vh;
+            margin: 0;
+            display: flex;
+            justify-content: center;             /* centering the form */
+            align-items: center;                   /* vertical centering */
+            position: relative;      
+            background-repeat: no-repeat;
+           }
+   
+        .container {
+            background-color: rgba(22, 53, 100, 0.8);           /* Dark transparent background */
+            border: 2px solid rgba(255, 255, 255, 0.8);          /* The white border */
+            width: 90%;
+            max-width: 450px;
+            padding: 50px;
+            border-radius: 20px;
+            color: white;          
+        }
+       
+        label {
+            font: small-caps;
+            font-weight: 500;
+            }
+
+        .img {
+            text-align: center;
+            margin-bottom: 20px;                /* the space between logo and form */
+        }
+
+        .img img {
+            width: 50%;
+            height: auto;
+        }
+
+        .log {
+            width: 100%;
+        }
+
+        .log button {
+            width: 100%;
+            border-radius: 40px;
+        }
+
+        .log a {
+            text-align: center;
+            font-size: small;
+            margin-top: 20px;
+        }
+
+        .log a > p {
+            margin-top: 10px;
+            color: white;
+            opacity: 0.7;
+            text-decoration: underline;
+        }
+
+        .log a > p:hover {
+            opacity: 1;
+        }
+
+        .back {
+            position: absolute;  
+            bottom: 20px;                          /* Positioninig */
+            left: 20px;         
+            width: auto;        
+            border-radius: 20px;                   /* Adjustable */
+            background-color: rgb(22, 53, 100);
+            cursor: pointer;
+            transition: box-shadow 0.3s ease, transform 0.3s ease;
+            padding: 10px 20px;                 /* I can keep padding */
+            text-align: center;
+            display: block;            
+        }
+
+        .back a {
+            text-decoration: none;
+            color: white;
+        }
+
+        .back:hover {
+            box-shadow: 0px 8px 30px rgba(0, 0, 0, 0.6);
+            transform: translateY(-10px) scale(1.05);
+            background-color: rgba(22, 53, 100, 0.8);
+        }
+
+        @media (max-width: 768px) {
+            .container {
+                padding: 20px;
+            }
+
+            .back {
+                font-size: 18px;
+                padding: 10px;
+            }
+        }
+    </style>
+    <title>Sign up</title>
+</head>
+<body>
+<div class="bgimg"></div>
+<div class="container">
+    <div class="img">
+        <a href="index.php"><img src="images/miva.png" alt="Miva logo"></a>
+    </div>
+
+    <form method="post" id="form">
+        <div class="form-group">
+            <label for="email">Email address</label>
+            <input type="email" class="form-control" id="email" name="email" placeholder="example@mail.com" required>
+        </div> 
+        <!-- Fixed id for username and confirm password--> 
+        <div class="form-group">
+            <label for="username">Username</label>
+            <input type="text" class="form-control" id="username" name="username" placeholder="John Doe" required>
+        </div>
+        <div class="form-group">
+            <label for="password">Password</label>
+            <input type="password" class="form-control" id="password" name="password" required>
+        </div>
+        <div class="form-group">
+            <label for="confirm_password">Confirm Password</label>
+            <input type="password" class="form-control" id="confirm_password" name="confirm_password" required>
+        </div>
+        <div class="log">
+            <button type="submit" class="btn btn-outline-light" name="submit">Create Account</button>
+            <a class="create" href="login.php"><p>Already have an account? Login</p></a>
+        </div>
+    </form>
+    <br>
+    <span id="alert"></span>
+</div>
+
+<div class="back">
+    <a href="index.php"><p> <----- Back </p></a>
+</div>
+<!-- for password and confirm password--> 
+<script type="text/javascript">
+    $('#form').on('submit', function(e) {
+        var password = $('#password').val();
+        var confirmPassword = $('#confirm_password').val();
+        if (password !== confirmPassword) {
+            e.preventDefault();
+            alert("Passwords do not match!");
+        }
+    });
+
+    var error = '<?php echo $error; ?>';
+    if (error != "") {
+        $('#alert').addClass('alert alert-danger');
+        $('#alert').append(error);
+    }
+</script>
+</body>
+</html>
